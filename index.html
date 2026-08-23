@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laith Mujibur Rahman — Junior UX Designer Portfolio</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --surface: #ffffff;
+    --text: #1a1a1a;
+    --text-2: #555;
+    --text-3: #888;
+    --accent: #2563eb;
+    --accent-light: #dbeafe;
+    --border: #e5e5e5;
+    --radius: 12px;
+    --max-w: 960px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(250,250,249,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+  }
+  .nav-inner {
+    max-width: var(--max-w);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+  }
+  .nav-logo {
+    font-weight: 700;
+    font-size: 18px;
+    color: var(--text);
+  }
+  .nav-links { display: flex; gap: 24px; }
+  .nav-links a {
+    color: var(--text-2);
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); text-decoration: none; }
+
+  /* SECTIONS */
+  section { padding: 80px 24px; }
+  .container { max-width: var(--max-w); margin: 0 auto; }
+
+  /* HERO */
+  .hero { padding: 100px 24px 80px; }
+  .hero-badge {
+    display: inline-block;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(32px, 5vw, 52px);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+  .hero p {
+    font-size: 18px;
+    color: var(--text-2);
+    max-width: 600px;
+    margin-bottom: 24px;
+  }
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: background 0.2s;
+  }
+  .hero-cta:hover { background: #1d4ed8; text-decoration: none; }
+
+  /* CASE STUDIES */
+  .section-label {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 40px;
+  }
+
+  .case-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 32px;
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .case-card:hover {
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+  }
+  .case-banner {
+    height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    position: relative;
+  }
+  .case-banner-label {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: rgba(255,255,255,0.9);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-2);
+  }
+  .case-body { padding: 24px; }
+  .case-body h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .case-body .subtitle {
+    font-size: 14px;
+    color: var(--text-2);
+    margin-bottom: 12px;
+  }
+  .case-body p {
+    font-size: 15px;
+    color: var(--text-2);
+    margin-bottom: 16px;
+  }
+  .case-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+  .case-tag {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: var(--bg);
+    color: var(--text-2);
+    font-weight: 500;
+  }
+
+  /* EXPANDED CASE STUDY */
+  .case-detail {
+    display: none;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 40px;
+    margin-bottom: 32px;
+  }
+  .case-detail.active { display: block; }
+  .case-detail h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .case-detail .meta {
+    font-size: 14px;
+    color: var(--text-3);
+    margin-bottom: 24px;
+  }
+  .case-section {
+    margin-bottom: 28px;
+  }
+  .case-section h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--accent);
+  }
+  .case-section p, .case-section li {
+    font-size: 15px;
+    color: var(--text-2);
+  }
+  .case-section ul {
+    padding-left: 20px;
+    margin-top: 6px;
+  }
+  .case-section li { margin-bottom: 6px; }
+  .case-close {
+    display: inline-block;
+    margin-top: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--accent);
+    cursor: pointer;
+  }
+
+  /* PROCESS DIAGRAM */
+  .process-row {
+    display: flex;
+    gap: 12px;
+    margin: 16px 0;
+    flex-wrap: wrap;
+  }
+  .process-step {
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+    padding: 16px 12px;
+    background: var(--bg);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  .process-step .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .process-step .label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* METRICS */
+  .metrics-row {
+    display: flex;
+    gap: 16px;
+    margin: 16px 0;
+    flex-wrap: wrap;
+  }
+  .metric-tile {
+    flex: 1;
+    min-width: 140px;
+    background: var(--accent-light);
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+  }
+  .metric-tile .val {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .metric-tile .desc {
+    font-size: 12px;
+    color: var(--text-2);
+    margin-top: 4px;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+  @media (max-width: 640px) {
+    .about-grid { grid-template-columns: 1fr; }
+  }
+  .about-text h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .about-text p {
+    font-size: 15px;
+    color: var(--text-2);
+    margin-bottom: 16px;
+  }
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .skill-chip {
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: var(--accent-light);
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 500;
+  }
+  .education-item {
+    padding: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    margin-bottom: 12px;
+  }
+  .education-item h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .education-item p {
+    font-size: 13px;
+    color: var(--text-3);
+  }
+
+  /* CONTACT */
+  #contact { background: var(--surface); border-top: 1px solid var(--border); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  @media (max-width: 640px) {
+    .contact-grid { grid-template-columns: 1fr; }
+  }
+  .contact-info h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .contact-info p {
+    font-size: 15px;
+    color: var(--text-2);
+    margin-bottom: 16px;
+  }
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text);
+  }
+  .contact-link:last-child { border-bottom: none; }
+  .contact-link span { color: var(--text-3); min-width: 70px; font-size: 13px; }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+    color: var(--text-3);
+    border-top: 1px solid var(--border);
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">Laith Mujibur Rahman</div>
+    <div class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">Open to opportunities</div>
+    <h1>I design digital experiences<br>people actually enjoy using.</h1>
+    <p>UI/UX Designer with a background in Information Technology and a passion for turning research insights into intuitive interfaces. Based in Chennai.</p>
+    <a href="#work" class="hero-cta">View my work &darr;</a>
+  </div>
+</section>
+
+<!-- CASE STUDIES -->
+<section id="work">
+  <div class="container">
+    <div class="section-label">Selected Work</div>
+    <div class="section-title">Case Studies</div>
+
+    <!-- Case 1: Card -->
+    <div class="case-card" onclick="toggleCase('case1')">
+      <div class="case-banner" style="background: url('Frame1.png') center 25% / cover no-repeat;">
+        <div class="case-banner-label">Mobile App</div>
+      </div>
+      <div class="case-body">
+        <h3>Momentum — Adaptive Routine System</h3>
+        <div class="subtitle">Designing a flexible routine system for imperfect days</div>
+        <p>A routine app that adapts to changing energy, late starts, missed tasks, and unpredictable schedules instead of forcing users into rigid routines.</p>
+        <div class="case-tags">
+          <span class="case-tag">User Research</span>
+          <span class="case-tag">Wireframing</span>
+          <span class="case-tag">Prototyping</span>
+          <span class="case-tag">Figma</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 1: Detail -->
+    <div class="case-detail" id="case1">
+      <h3>Momentum — Adaptive Routine System</h3>
+      <div class="meta">Mobile App &middot; 6 weeks &middot; Solo Designer</div>
+
+      <div class="process-row">
+        <div class="process-step"><div class="num">1</div><div class="label">Research</div></div>
+        <div class="process-step"><div class="num">2</div><div class="label">Define</div></div>
+        <div class="process-step"><div class="num">3</div><div class="label">Ideate</div></div>
+        <div class="process-step"><div class="num">4</div><div class="label">Prototype</div></div>
+        <div class="process-step"><div class="num">5</div><div class="label">Test</div></div>
+      </div>
+
+      <div class="case-section">
+        <h4>The Problem</h4>
+        <p>Most routine apps rely on rigid schedules and streaks, but real life is unpredictable—when plans break, users struggle to recover. This can lead to guilt, overwhelming catch-up lists, and eventually abandoned routines.</p>
+      </div>
+      <div class="case-section">
+        <h4>Research</h4>
+        <p>I explored how people build and maintain routines, especially what happens when plans are interrupted. <br> I looked at:</p>
+        <ul>
+          <li>How users plan and structure routines</li>
+          <li>What happens when tasks are missed</li>
+          <li>How streaks and missed days affect motivation</li>
+          <li>How energy levels influence completion</li>
+          <li>What helps users restart after falling off track</li>
+        </ul>
+      </div>
+      <div class="case-section">
+        <h4>Key Insight</h4>
+        <p>People don’t fail routines because they’re lazy—they fail when routines are too rigid for real life. <b>Momentum shifts the focus from perfect streaks to continuity, recovery, and getting back on track.</b></p>
+      </div>
+      <div class="case-section">
+        <h4>Solution</h4>
+        <p>Momentum is designed around one question: <b>What’s realistically achievable today?</b></p>
+        <ul>
+          <li><b> Time Blocks —</b> Organize routines by Morning, Midday, Evening, and Before Sleep</li>
+          <li><b>Adaptive Compression —</b> Shorten and reprioritize routines when time is limited</li>
+          <li><b>Energy-Based Planning —</b> Adjust activities based on Low, Medium, or High energy</li>
+          <li><b>Momentum Score —</b> Reward consistency, small wins, and recovery instead of streaks</li>
+          <li><b>Shame-Free Restart —</b> Help users continue after missed days without focusing on what they missed</li>
+          <li><b>Overflow System —</b> Let users Move, Simplify, or Skip tasks instead of creating a backlog</li>
+        </ul>
+      </div>
+      <div class="case-section">
+        <h4>Project Outcome</h4>
+        <div class="metrics-row">
+          <div class="metric-tile"><div class="val">Flexible Plans</div><div class="desc">Adapt to changing plans</div></div>
+          <div class="metric-tile"><div class="val">Gentle Restart</div><div class="desc">No guilt after missed tasks</div></div>
+          <div class="metric-tile"><div class="val">Energy Aware</div><div class="desc">Match tasks to energy</div></div>
+          <div class="metric-tile"><div class="val">Focus Today</div><div class="desc">What can I do today?</div></div>
+        </div>
+      </div>
+      <div class="case-section">
+        <h4>What I Learned</h4>
+        <p>Designing Momentum taught me that productivity isn’t about forcing consistency—it’s about supporting people when consistency breaks.<br><br>
+          <b>My biggest takeaway:</b> Good routine design isn’t about creating a perfect schedule; it’s about creating a system people can confidently return to.<br><br>
+          This project strengthened my understanding of <b>behavioral UX, adaptive systems, emotional design, and designing for sustainable habits.</b></p>
+      </div>
+      <div class="case-close" onclick="toggleCase('case1')">&larr; Back to case studies</div>
+    </div>
+
+    <!-- Case 2: Card -->
+    <div class="case-card" onclick="toggleCase('case2')">
+      <div class="case-banner" style="background: url('Eduhope.png') center 25% / cover no-repeat;">
+        <div class="case-banner-label">Website Design</div>
+      </div>
+
+      
+
+
+      <div class="case-body">
+        <h3>EduHope — Education Consultancy Website</h3>
+        <div class="subtitle">Creating a trustworthy digital presence for an education consultancy</div>
+        <p>Designed and developed a clean, modern website for EduHope, helping students explore education opportunities in India and abroad while giving the business a stronger and more professional online presence.</p>
+        <div class="case-tags">
+          <span class="case-tag">Information Architecture</span>
+          <span class="case-tag">Visual Design</span>
+          <span class="case-tag">Responsive Web Design</span>
+          <span class="case-tag">Figma</span>
+          <span class="case-tag">Wix Studio</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 2: Detail -->
+    <div class="case-detail" id="case2">
+      <h3>EduHope — Education Consultancy Website</h3>
+      <div class="meta">Website &middot; 6 weeks &middot; Solo Designer</div>
+
+      <div class="process-row">
+        <div class="process-step"><div class="num">1</div><div class="label">Understand</div></div>
+        <div class="process-step"><div class="num">2</div><div class="label">Structure</div></div>
+        <div class="process-step"><div class="num">3</div><div class="label">Explore</div></div>
+        <div class="process-step"><div class="num">4</div><div class="label">Design</div></div>
+        <div class="process-step"><div class="num">5</div><div class="label">Deliver</div></div>
+      </div>
+
+      <div class="case-section">
+        <h4>The Problem</h4>
+        <p>Choosing a college or studying abroad is a major decision, yet many education consultancy websites feel crowded, outdated, and overly promotional.<br><br>
+            EduHope needed a modern, trustworthy website that clearly communicates its services while making students and parents feel confident about reaching out.<br><br>
+          <b>The design challenge:</b><br>
+          How might we make EduHope feel credible, approachable, and different from other education consultancies?</p>
+      </div>
+      <div class="case-section">
+        <h4>Research</h4>
+        <p>I reviewed EduHope’s services, target audience, and competitor websites to understand what students look for when choosing an education consultancy.</p>
+        <ul>
+          <li>Students need clear information and guidance</li>
+          <li>Trust and credibility are important before making an enquiry</li>
+          <li>There was an opportunity to make EduHope feel clearer, more modern, and approachable</li>
+        </ul>
+      </div>
+      <div class="case-section">
+        <h4>Solution</h4>
+        <p>I designed EduHope around one simple idea:<br><br>
+          <b>Make the journey from discovering EduHope to making an enquiry feel effortless.</b>
+        </p>
+        <ul>
+          <li><b>Clear Services —</b> Organised key services so visitors can quickly understand how EduHope can help</li>
+          <li><b>Strong Visual Hierarchy —</b> Used clear typography, spacing, and sections to make information easy to scan.</li>
+          <li><b>Trust-Focused Design —</b> Highlighted credibility and reasons to choose EduHope before asking users to enquire.</li>
+          <li><b>Modern Visual Identity —</b> Used minimal layouts, soft imagery, subtle gradients, and generous whitespace.</li>
+          <li><b>Clear Conversion Path —</b> Guided users through Explore → Understand → Trust → Contact</li>
+          <li><b>Responsive Design —</b> Ensured the experience remains clear and usable across different screen sizes.</li>
+        </ul>
+      </div>
+      <div class="case-section">
+        <h4>Project Outcome</h4>
+        <div class="metrics-row">
+          <div class="metric-tile"><div class="val">Service Clarity</div><div class="desc">Easy-to-understand services</div></div>
+          <div class="metric-tile"><div class="val">Build Trust</div><div class="desc">Credibility before enquiry</div></div>
+          <div class="metric-tile"><div class="val">Easy Enquiry</div><div class="desc">Simple route to contact</div></div>
+        </div>
+      </div>
+      <div class="case-section">
+        <h4>What I Learned</h4>
+        <p>The project showed me that a successful client website isn't just about looking better — it needs to solve a real communication problem for the business.<br><br>
+            By improving the structure, visual identity, and enquiry journey, I helped EduHope move from a basic website requirement to a clearer and more professional digital presence.</p>
+      </div>
+      <div class="case-close" onclick="toggleCase('case2')">&larr; Back to case studies</div>
+    </div>
+
+    
+    
+
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">About Me</div>
+    <div class="section-title">Background & Skills</div>
+    <div class="about-grid">
+      <div class="about-text">
+        <h3>Hi, I'm Laith Mujibur Rahman.</h3>
+        <p> I am a UI/UX designer with a background in Information Technology. I specialise in designing websites and digital products that are simple, clear, and easy to use.<br><br>
+            I enjoy being involved across the full product lifecycle—from understanding the problem and exploring concepts in Figma, to designing the interface and seeing it delivered as a working product.<br><br>
+            I am committed to growing as a designer by working on real projects, learning from each experience, and deepening my understanding of how people interact with digital products.</p>
+        <p>I'm continuing to grow as a designer by working on real projects, learning from each one, and improving my understanding of how people interact with digital products.</p>
+        <h3 style="margin-top: 24px;">Tools & Methods</h3>
+        <div class="skills-list">
+          <span class="skill-chip">Figma</span>
+          <span class="skill-chip">Wix Studio</span>
+          <span class="skill-chip">User Flows</span>
+          <span class="skill-chip">Interaction Design</span>
+          <span class="skill-chip">Auto Layout</span>
+          <span class="skill-chip">Wireframing</span>
+          <span class="skill-chip">Prototyping</span>
+          <span class="skill-chip">Responsive Design</span>
+          <span class="skill-chip">Basic HTML/CSS</span>
+          <span class="skill-chip">Javascript</span>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-size:20px;font-weight:700;margin-bottom:16px;">Education</h3>
+        <div class="education-item">
+          <h4>B.Tech in Information Technology</h4>
+          <p>SNS College of Technology &middot; 2024</p>
+        </div>
+        <div class="education-item">
+          <h4>Figma UI/UX Design Essentials Certificate</h4>
+          <p> Udemy &middot; 2026</p>
+        </div>
+        <h3 style="font-size:20px;font-weight:700;margin:24px 0 16px;">Experience</h3>
+        <div class="education-item">
+          <h4>UI/UX & Web Designer</h4>
+          <p>Freelance · Project Based &middot; 2025</p>
+          <p style="margin-top:6px;color:var(--text-2);">Designed websites and digital experiences for real-world businesses, focusing on usability, clarity, and visual design.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">Get In Touch</div>
+    <div class="section-title">Let's work together</div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>I’m interested in exploring UI/UX opportunities.</h3>
+        <p>UI/UX Designer with a background in Information Technology and a passion for translating research insights into intuitive interfaces. Based in Chennai.</p>
+      </div>
+      <div>
+        <div class="contact-link"><span>Email</span> laithmujiburrahman@gmail.com</div>
+        <div class="contact-link"><span>LinkedIn</span> linkedin.com/in/laith-m-r</div>
+        <div class="contact-link"><span>Location</span> Chennai, India</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  &copy; 2026 Laith Mujibur Rahman
+</footer>
+
+<script>
+function toggleCase(id) {
+  const el = document.getElementById(id);
+  const isActive = el.classList.contains('active');
+  // Close all
+  document.querySelectorAll('.case-detail').forEach(d => d.classList.remove('active'));
+  // Toggle clicked
+  if (!isActive) {
+    el.classList.add('active');
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+}
+</script>
+</body>
+</html>
